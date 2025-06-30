@@ -54,6 +54,20 @@ export default function SurveyPage() {
   }
 
   const handleSubmit = () => {
+    fetch('https://sheetdb.io/api/v1/tveuh3gbm36fi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: formData })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('SheetDB Success:', data);
+      // You can keep your toast and redirect here
+    })
+    .catch((error) => {
+      console.error('SheetDB Error:', error);
+      // Optionally show an error message to the user
+    });
     setSurveyData(formData)
     setCompleted(true)
     toast({
