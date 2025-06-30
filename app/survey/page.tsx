@@ -59,25 +59,24 @@ export default function SurveyPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data: formData })
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('SheetDB Success:', data);
-      // You can keep your toast and redirect here
-    })
-    .catch((error) => {
-      console.error('SheetDB Error:', error);
-      // Optionally show an error message to the user
-    });
-    setSurveyData(formData)
-    setCompleted(true)
-    toast({
-      title: "Survey Submitted!",
-      description: "Thank you for your participation. Redirecting to thank you page...",
-    })
-    setTimeout(() => {
-      router.push("/thank-you")
-    }, 1500)
-  }
+      .then(response => response.json())
+      .then(data => {
+        console.log('SheetDB Success:', data);
+        setSurveyData(formData);
+        setCompleted(true);
+        toast({
+          title: "Survey Submitted!",
+          description: "Thank you for your participation. Redirecting to thank you page...",
+        });
+        setTimeout(() => {
+          router.push("/thank-you");
+        }, 1500);
+      })
+      .catch((error) => {
+        console.error('SheetDB Error:', error);
+        // Optionally show an error message to the user
+      });
+  };
 
   const renderStep = () => {
     switch (currentStep) {
